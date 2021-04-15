@@ -17,6 +17,7 @@
 
 package com.example.android.devbyteviewer.database
 
+<<<<<<< HEAD
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -55,4 +56,18 @@ fun getDatabase(context: Context): VideosDatabase {
         }
     }
     return INSTANCE
+=======
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+
+@Dao
+interface VideoDao {
+    @Query("select * from databasevideo")
+    fun getVideos(): List<DatabaseVideo>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(vararg videos: DatabaseVideo)
+>>>>>>> andfun-kotlin-dev-bytes/development
 }
