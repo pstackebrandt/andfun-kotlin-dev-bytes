@@ -28,8 +28,8 @@ import com.example.android.devbyteviewer.R
 class DevByteActivity : AppCompatActivity() {
 
     /**
-     * Called when the activity is starting.  This is where most initialization
-     * should go
+     * Activity is only responsible for setting the content view that contains the
+     * Navigation Host.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

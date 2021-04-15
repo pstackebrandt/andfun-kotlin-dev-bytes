@@ -27,7 +27,7 @@ import com.example.android.devbyteviewer.repository.VideosRepository
 import kotlinx.coroutines.launch
 
 /**
- * DevByteViewModel designed to store and manage UI-related data in a lifecycle conscious way. This
+ * DevByteViewModel is designed to store and manage UI-related data in a lifecycle conscious way. This
  * allows data to survive configuration changes such as screen rotations. In addition, background
  * work such as fetching network results can continue through configuration changes and deliver
  * results after the new Fragment or Activity is available.

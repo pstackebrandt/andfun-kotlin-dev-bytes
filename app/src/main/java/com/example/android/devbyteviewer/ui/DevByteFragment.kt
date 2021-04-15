@@ -53,8 +53,8 @@ class DevByteFragment : Fragment() {
         }
         //The ViewModelProviders (plural) is deprecated.  
         //ViewModelProviders.of(this, DevByteViewModel.Factory(activity.application)).get(DevByteViewModel::class.java)
-        ViewModelProvider(this, DevByteViewModel.Factory(activity.application)).get(DevByteViewModel::class.java)
-                
+        ViewModelProvider(this, DevByteViewModel.Factory(activity.application))
+            .get(DevByteViewModel::class.java)
     }
 
     /**
@@ -93,20 +93,21 @@ class DevByteFragment : Fragment() {
      *
      * @return Return the View for the fragment's UI.
      */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?)
+        : View {
         val binding: FragmentDevByteBinding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.fragment_dev_byte,
-                container,
-                false)
+            inflater,
+            R.layout.fragment_dev_byte,
+            container,
+            false)
         // Set the lifecycleOwner so DataBinding can observe LiveData
-        binding.setLifecycleOwner(viewLifecycleOwner)
-
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         viewModelAdapter = DevByteAdapter(VideoClick {
-            // When a video is clicked this block or lambda will be called by DevByteAdapter
+            // When a video is clicked this block or lambda will be called by DevByteAdapter.
 
             // context is not around, we can safely discard this click since the Fragment is no
             // longer on the screen
@@ -114,7 +115,7 @@ class DevByteFragment : Fragment() {
 
             // Try to generate a direct intent to the YouTube app
             var intent = Intent(Intent.ACTION_VIEW, it.launchUri)
-            if(intent.resolveActivity(packageManager) == null) {
+            if (intent.resolveActivity(packageManager) == null) {
                 // YouTube app isn't found, use the web url
                 intent = Intent(Intent.ACTION_VIEW, Uri.parse(it.url))
             }
@@ -122,10 +123,11 @@ class DevByteFragment : Fragment() {
             startActivity(intent)
         })
 
-        binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = viewModelAdapter
-        }
+        binding.root.findViewById<RecyclerView>(R.id.recycler_view)
+            .apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = viewModelAdapter
+            }
 
         return binding.root
     }
@@ -177,10 +179,10 @@ class DevByteAdapter(val callback: VideoClick) : RecyclerView.Adapter<DevByteVie
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DevByteViewHolder {
         val withDataBinding: DevbyteItemBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                DevByteViewHolder.LAYOUT,
-                parent,
-                false)
+            LayoutInflater.from(parent.context),
+            DevByteViewHolder.LAYOUT,
+            parent,
+            false)
         return DevByteViewHolder(withDataBinding)
     }
 
@@ -204,7 +206,7 @@ class DevByteAdapter(val callback: VideoClick) : RecyclerView.Adapter<DevByteVie
  * ViewHolder for DevByte items. All work is done by data binding.
  */
 class DevByteViewHolder(val viewDataBinding: DevbyteItemBinding) :
-        RecyclerView.ViewHolder(viewDataBinding.root) {
+    RecyclerView.ViewHolder(viewDataBinding.root) {
     companion object {
         @LayoutRes
         val LAYOUT = R.layout.devbyte_item
