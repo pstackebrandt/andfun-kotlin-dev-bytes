@@ -69,6 +69,7 @@ class DevByteApplication : Application() {
                     setRequiresDeviceIdle(true)
                 }
             }.build()
+
         val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(
             1,
             TimeUnit.DAYS

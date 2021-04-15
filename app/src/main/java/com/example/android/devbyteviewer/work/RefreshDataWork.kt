@@ -32,6 +32,12 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters)
     }
 
     /**
+     * A coroutine-friendly method to do your work.
+     * Note: In recent work version upgrade, 1.0.0-alpha12 and onwards have a breaking change.
+     * The doWork() function now returns Result instead of Payload because they have combined Payload into Result.
+     * Read more here - https://developer.android.com/jetpack/androidx/releases/work#1.0.0-alpha12
+     */
+    /**
      * A suspending method to do your work.  This function runs on the coroutine context specified
      * by [coroutineContext].
      * <p>
